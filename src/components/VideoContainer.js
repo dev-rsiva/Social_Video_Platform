@@ -31,12 +31,17 @@ const VideoContainer = () => {
     console.log(json.items);
     setVideos(json.items);
   };
+  console.log(videos);
 
   return (
     <div className="flex flex-wrap">
       {videos.map((video) => {
-        console.log(video.id.videoId);
-        const id = searchParams === null ? video.id : video.id.videoId;
+        console.log(video);
+        const id =
+          searchParams.get("search_query") === null
+            ? video.id
+            : video.id.videoId;
+        console.log(id);
         return (
           <Link key={video.id} to={"/watch?v=" + id}>
             <VideoCard info={video} />

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import { YOUTUBE_VIDEO_API } from "../utills/constants";
 import CommentsContainers from "./CommentsContainers";
+import LiveChat from "./LiveChat";
 
 const WatchPage = () => {
   const dispatch = useDispatch();
@@ -28,20 +29,25 @@ const WatchPage = () => {
     setVideoInfo(json.items[0]);
   };
   return (
-    <div className="flex flex-col">
-      <div className="px-5 py-5 rounded">
-        <iframe
-          width="855"
-          height="483"
-          src={"https://www.youtube.com/embed/" + searchParams.get("v")}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerPolicy="strict-origin-when-cross-origin"
-          allowFullScreen
-        ></iframe>
-        <h1 className="font-bold text-xl py-1">{videoInfo.snippet?.title}</h1>
+    <div className="flex flex-col w-full">
+      <div className="px-5 py-5 rounded flex w-full">
+        <div>
+          <iframe
+            width="855"
+            height="483"
+            src={"https://www.youtube.com/embed/" + searchParams.get("v")}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <div className="w-full">
+          <LiveChat />
+        </div>
       </div>
+      <h1 className="font-bold text-xl py-1">{videoInfo?.snippet?.title}</h1>
       <CommentsContainers />
     </div>
   );
