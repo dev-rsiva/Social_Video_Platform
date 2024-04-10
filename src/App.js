@@ -14,44 +14,35 @@ import Demo2 from "./components/Demo2.js";
 const appRouter = createBrowserRouter([
   {
     path: "/",
-    element: <AppLayout />,
+    element: (
+      <>
+        <Head />
+        <Body />
+      </>
+    ),
     children: [
+      { path: "/", element: <MainContainer /> },
+      { path: "/watch", element: <WatchPage /> },
+      { path: "/results", element: <MainContainer /> },
       {
-        path: "/",
-        element: <Body />,
-        children: [
-          { path: "/", element: <MainContainer /> },
-          { path: "/watch", element: <WatchPage /> },
-          { path: "/results", element: <MainContainer /> },
-          {
-            path: "/Demo",
-            element: (
-              <>
-                <Demo />
-                <Demo2 />
-              </>
-            ),
-          },
-        ],
+        path: "/Demo",
+        element: (
+          <>
+            <Demo />
+            <Demo2 />
+          </>
+        ),
       },
     ],
   },
 ]);
 
-function AppLayout() {
-  return (
-    <div>
-      <Head />
-      <Outlet />
-    </div>
-  );
-}
-
 function App() {
   return (
     <Provider store={store}>
       <RouterProvider router={appRouter}>
-        <AppLayout />
+        <Head />
+        <Outlet />
       </RouterProvider>
     </Provider>
   );
